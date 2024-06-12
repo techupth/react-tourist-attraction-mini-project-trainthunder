@@ -8,6 +8,7 @@ function App() {
   const [searchTravel, setSearchTravel] = useState("");
 
   const getTravelList = async (text) => {
+    console.log(`http://localhost:4001/trips?keywords=${text}`);
     try {
       const result = await axios.get(
         `http://localhost:4001/trips?keywords=${text}`
@@ -20,7 +21,7 @@ function App() {
   };
 
   useEffect(() => {
-    getTravelList(searchTravel);
+    getTravelList(searchTravel.trim());
   }, [searchTravel]);
 
   const handleSearch = (e) => {
@@ -37,7 +38,7 @@ function App() {
   };
 
   const handleTag = (group) => {
-    setSearchTravel(group);
+    setSearchTravel((newgroup) => newgroup + " " + group);
   };
 
   return (
